@@ -1,0 +1,15 @@
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\bin\Debug\net10.0\p3ABIA.exe
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\bin\Debug\net10.0\p3ABIA.deps.json
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\bin\Debug\net10.0\p3ABIA.runtimeconfig.json
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\bin\Debug\net10.0\p3ABIA.dll
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\bin\Debug\net10.0\p3ABIA.pdb
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\p3ABIA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\p3ABIA.AssemblyInfoInputs.cache
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\p3ABIA.AssemblyInfo.cs
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\p3ABIA.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\p3ABIA.sourcelink.json
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\p3ABIA.dll
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\refint\p3ABIA.dll
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\p3ABIA.pdb
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\p3ABIA.genruntimeconfig.cache
+C:\Users\Usuario\OneDrive\Escritorio\2carrera\segundoCuatri\ABIA\p3\p3ABIA\obj\Debug\net10.0\ref\p3ABIA.dll
