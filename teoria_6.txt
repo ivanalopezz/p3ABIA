@@ -1,0 +1,667 @@
+               Algoritmos básicos de la IA
+               Grao en Intelixencia Artificial
+               Tema 6
+               Búsqueda adversaria
+               Alejandro Rodríguez Arias
+               alejandro.rodriguez.arias@udc.es
+               Facultad de Informática
+               https://www.fic.udc.es
+        Índice
+           Introducción
+           Minimax
+           Podaα–β
+                                                                                      2
+        Índice
+           Introducción
+           Minimax
+           Podaα–β
+                                                                                      3
+       Entornos multiagente
+        Entornosmultiagente
+           • Cooperativos
+           • Competitivos
+        Teoríadeljuego enIA
+           • Deterministas
+           • Porturnos
+           • Dosjugadores
+           • Juegosdesuma0
+           • Informacióncompleta
+           • Losagentestienenunconjuntodeacciones limitado
+                                                                           4
+         Tipos de juegos
+            Tipos de juegos            Deterministas              Probabilidad
+            Información completa       Ajedrez, damas             Monopoly
+            Información incompleta     Hundir la flota            Scrabble, póker, magic
+                                                                                               5
+        Juegos vs problemas de búsqueda
+         Buscamosconvertireljuegoenunproblemadebúsqueda
+         Árboldejuego
+             • Estadoinicial: raíz del árbol de juego
+             • Funciónde sucesores: reglas del juego
+             • Estadofinal: condición de fin del juego
+             • Funcióndeutilidadquele otorgaunvaloralosestadosfinales.
+         Terminología
+             • Dosjugadoresquese llamanMAXyMIN
+             • MAX buscaenelárbol dejuego.
+                                                                                    6
+       Árbol de juego para el tres en raya
+                 X                                       X
+                                     X
+                                                                  …
+           X                   X                X                    X
+               O                                                 O
+                               O            O
+                                                                         7
+        Índice
+           Introducción
+           Minimax
+           Podaα–β
+                                                                                      8
+       Algoritmo Minimax
+        • El algoritmo minimax obtiene la mejor jugada para juegos 
+          deterministas con información completa.
+        • Ideabásica: Elegir siempre el nodo con mayor valor minimax.
+                                                                          9
+      Algoritmo Minimax
+                                                                   10
+        Algoritmo minimax
+       1.   Generacióndel árbolde juego: a partirdel estado actual se genera el
+            espacio de juego hasta llegar a los nodos terminales.
+       2.   Secalculanlos valores de la función de utilidad para cada nodo 
+            hoja del árbol construido.
+       3.   Se evalúan los nodos superiores a partir del valor de los inferiores. 
+            Segúnsiestos nodos pertenecena unnivelMAX o aunnivelMIN, se
+            elegirán los valores mínimos y máximos representando los 
+            movimientos del jugador y del oponente.
+       4.   Se repite el paso 3 hasta llegar al nodo superior (estado actual)
+       5.   Se selecciona la jugada-nodo directamente accesible desde el 
+            nodoactualqueoptimizaelvalordelaevaluación
+                                                                                      11
+        ¿Cómoconstruimoselárbolparaminimax?
+           Vamosaexplicarelalgoritmo pasoa paso
+           Los nodos con una pirámide son elecciones de MAX, los nodos con 
+            pirámide invertida son elecciones de MIN. El objetivo de MAX es 
+            maximizar la función de utilidad y el objetivo de min es minimizarla
+                       MAX                            MIN
+                                                                                        12
+        ¿Cómoconstruimoselárbolparaminimax?
+         Generamoselárboldeformahabitualutilizandolasacciones disponibles
+           para cada estado.
+                                                                                      13
+       ¿Cómoconstruimoselárbolparaminimax?
+        Aplicamos la función de utilidad sobre los estados terminales
+                                   4       6
+                            2                                     2
+            12     8                                14     5
+      3
+                                                                    14
+        ¿Cómoconstruimoselárbolparaminimax?
+            Ahora estamos en un nodo MIN, quien quiere minimizar la función de 
+             utilidad. Su jugada idealmente minimizará la función para MAX
+                                        2                              2
+         3
+                                             4         6
+                                    2                                                2
+               12       8                                          14       5
+       3
+                                                                                       15
+        ¿Cómoconstruimoselárbolparaminimax?
+           Ahora estamos en un nodo MAX, quien quiere maximizar la función de 
+            utilidad.
+                                      3
+                                       2                             2
+         3
+                                            4        6
+                                   2                                              2
+               12      8                                         14       5
+       3
+                                                                                     16
+      Algoritmo minmax
+                                                                   17
+        Algoritmo minmax
+                   ¿Se os ocurre algún problema con el algoritmo?
+                                                                               18
+        Algoritmo minmax
+           El algoritmo no garantiza la elección optima si no se puede generar el
+            árbol completo.
+           Enestecasodependerácompletamentedelaheurística 
+            proporcionadaporel analista del juego.
+           Si no se puede construir todo el árbol se generará hasta llegar a 
+            alguna de estas condiciones:
+              • Seencuentraunnodoterminal
+              • SehanexploradoNniveles
+              • Seagotaeltiempodeexploración
+              • Sellegaaunasituaciónestática singrandescambiosdeunnivel
+                 a otro.
+                                                                                        19
+        Algoritmo minmax
+            ¿Realizauna búsquedacompleta?
+               • Sí, siempre que el árbol sea finito
+            ¿Complejidadtemporal?
+                      m
+               • O(b )(Siendobelfactorderamificacióny mla profundidad)
+            ¿Complejidadespacial?
+               • O(bm)
+            ¿Óptimo?
+               • Sí(contraunoponenteóptimo)
+               • No(contra unoponentesubóptimo)
+                                                                                     20
+        Índice
+           Introducción
+           Minimax
+           Podaα–β
+                                                                                      21
+        Poda α–β
+           La complejidad temporal y espacial del algoritmo minmax son un 
+            problema.
+           ¿Necesitamosel árbol de juego completo?
+                                                                                      22
+       ¿Necesitamoselárboldejuegocompleto?
+                   35   55
+                25                     40 10     15
+      80   30
+                            20
+                                              70     50      60
+                               05 65                     45
+                                                                75
+                                                                    23
+       ¿Necesitamoselárboldejuegocompleto?
+    30
+                   35   55
+                25                     40 10     15
+      80   30
+                            20
+                                              70     50      60
+                               05 65                     45
+                                                                75
+                                                                    24
+       ¿Necesitamoselárboldejuegocompleto?
+              25
+    30
+                   35   55
+                25                     40 10     15
+      80   30
+                            20
+                                              70     50      60
+                               05 65                     45
+                                                                75
+                                                                    25
+       ¿Necesitamoselárboldejuegocompleto?
+                       ¿Nosinteresa el valor del 
+                                  nodo?
+    30
+              25
+                   ??   55
+                25                     40 10     15
+      80   30
+                            20
+                                              70     50      60
+                               05 65                     45
+                                                                75
+                                                                    26
+      Poda α–β
+                         Veamosotroejemplo
+                                                                   27
+       Poda α–β
+            12     8
+      3
+                                                                    28
+       Poda α–β
+         3
+            12     8
+      3
+                                                                    29
+       Poda α–β
+                                        ??
+         3
+            12      8
+      3
+                                                                     30
+       Poda α–β
+                                       >=3
+         3
+            12     8
+      3
+                                                                    31
+       Poda α–β
+                                        >=3
+                                        ??
+         3
+                             2
+            12      8
+      3
+                                                                     32
+        Poda α–β
+                                                 >=3
+                                                 <=2
+           3
+                                               ¿Tiene sentido seguir 
+                                               explorando la rama?
+                                    2
+               12       8
+       3
+                                                                                     33
+       Poda α–β
+                                        >=3
+                              <=2               ??
+         3
+                             2               14
+            12      8
+      3
+                                                                     34
+        Poda α–β
+                                                 >=3
+                                     <=2
+           3
+                                                         <=14
+                                                              ¿Tiene sentido seguir 
+                                                              explorando la rama?
+                                    2                  14
+               12       8
+       3
+                                                                                     35
+       Poda α–β
+                                        >=3
+                              <=2
+         3
+                                               <=5
+                             2               14
+            12      8
+      3                                               5
+                                                                     36
+       Poda α–β
+                                        3
+                              <=2
+         3
+                                                  2
+                                                      5
+                             2               14
+            12      8                                          2
+      3
+                                                                     37
+        Poda α–β
+        La poda α–β es una técnica que reduce el número de nodos evaluados en el
+        árbol de juego construido por el algoritmo Minimax.
+        Idea: cada nodo se analiza teniendo en cuenta el valor que por el momento
+        tiene y el valor que por el momento tiene su padre, lo que determina en
+        cada momentounintervalo(α,β)
+        Intuitivamente:
+          αeselmejorvalorparaMAXenelcamino
+          β eselmejorvalorparaMINenelcamino
+          Sienalgúnmomentoα>=βnohacefalta seguir analizandolos 
+            sucesores.
+                                                                                        38
+        Poda α–β
+                                   α=-∞ 
+                                   β = ∞
+                   α=-∞ 
+                   β = ∞
+         α=-∞ 
+         β = ∞
+             α=-∞ 
+             β = ∞
+                       35    55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 39
+        Poda α–β
+                                   α=-∞ 
+                                   β = ∞
+                   α=-∞ 
+                   β = ∞
+         α=-∞ 
+         β = ∞
+              α=-∞ 
+              β = 80
+                        35   55
+                   25                          40 10        15
+       80    30
+                                  20
+                                                        70       50       60
+                                      05 65                           45
+                                                                               75
+                                                                                   40
+        Poda α–β
+                                   α=-∞ 
+                                   β = ∞
+                   α=-∞ 
+                   β = ∞
+         α=-∞ 
+         β = ∞
+              α=30
+              β = 30
+                        35   55
+                   25                          40 10        15
+       80    30
+                                  20
+                                                        70       50       60
+                                      05 65                           45
+                                                                               75
+                                                                                   41
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+         α=30
+         β = ∞
+             30
+                       35    55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 42
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+         α=30
+         β = ∞
+                        α=30
+                        β = ∞
+             30
+                       35    55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 43
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+         α=30
+         β = ∞
+                        α=30
+                        β = 25
+                         α> β
+             30
+                       35    55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 44
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+         α=30
+         β = ∞
+                        α=30
+                        β = 25
+                         α> β
+             30
+                       35    55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 45
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+             30
+                         25
+             30
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 46
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+                           α=-∞
+             30
+                           β = 30
+             30
+                         α=-∞
+                  25
+                         β = 30
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 47
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+                           α=-∞
+             30
+                           β = 30
+             30
+                         α=20
+                  25
+                         β = 20
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 48
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+                           α=20
+             30
+                           β = 30
+                                          α=20
+                                          β = 30
+                            20
+             30
+                  25
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 49
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                   α=-∞
+                   β = 30
+                           α=20
+             30
+                           β = 30
+                                          α=20
+                                          β = 05
+                            20
+             30
+                  25
+                                          α> β
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 50
+        Poda α–β
+                                   α=-∞
+                                   β = ∞
+                      20
+             30
+                              20
+                            20
+             30
+                                            05
+                  25
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 51
+        Poda α–β
+                                   α=20
+                                   β = ∞
+                                                                α=20
+                      20
+                                                                β = ∞
+                                             α=20
+             30
+                              20
+                                             β = ∞
+                            20
+             30
+                                            05
+                  25
+                                                   α=20
+                                                   β = ∞
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 52
+        Poda α–β
+                                   α=20
+                                   β = ∞
+                                                                α=20
+                      20
+                                                                β = ∞
+                                             α=20
+             30
+                              20
+                                             β = ∞
+                            20
+             30
+                                            05
+                  25
+                                                   α=20
+                                                   β = 10
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 53
+        Poda α–β
+                                   α=20
+                                   β = ∞
+                                                                α=20
+                      20
+                                                                β = ∞
+                                             α=20
+             30
+                              20
+                                             β = ∞
+                            20
+             30
+                                            05
+                                                    10
+                  25
+                                                            α=20
+                                                            β = 15
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 54
+        Poda α–β
+                                   α=20
+                                   β = ∞
+                                                                α=20
+                      20
+                                                                β = 15
+                                                15
+             30
+                              20
+                            20
+                                                              15
+             30
+                                            05
+                                                    10
+                  25
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 55
+        Poda α–β
+                                   α=20
+                                   β = ∞
+                                                                α=20
+                      20
+                                                                β = 15
+                                                                 α> β
+             30
+                                                 15
+                              20
+                            20
+             30
+                                            05
+                                                             15
+                                                    10
+                  25
+                             55
+                   25                         40 10        15
+       80   30
+                                 20
+                                                       70       50      60
+                                      05 65                         45
+                                                                             75
+                                                                                 56
+        Propiedades delaPodaα–β
+          Noafectaalresultadofinal delalgoritmo minimax
+          Reducelacomplejidadespacial y temporal del algoritmo minimax
+                                                                                  57
+      Podaα–β
+                                                                   58
+               Algoritmos básicos de la IA
+               Grao en Intelixencia Artificial
+               Tema 6
+               Búsqueda adversaria
+               Alejandro Rodríguez Arias
+               alejandro.rodriguez.arias@udc.es
+               Facultad de Informática
+               https://www.fic.udc.es

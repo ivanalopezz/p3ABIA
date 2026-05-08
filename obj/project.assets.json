@@ -8,7 +8,7 @@
     "net10.0": []
   },
   "packageFolders": {
-    "c:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3\\p3ABIA\\.dotnet-home\\.nuget\\packages\\": {}
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -16,7 +16,7 @@
       "projectUniqueName": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3\\p3ABIA\\p3ABIA.csproj",
       "projectName": "p3ABIA",
       "projectPath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3\\p3ABIA\\p3ABIA.csproj",
-      "packagesPath": "c:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3\\p3ABIA\\.dotnet-home\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3\\p3ABIA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
