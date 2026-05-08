@@ -6,22 +6,17 @@ public static class Program
     // Profundidad de busqueda de ambos agentes.
     private const int ProfundidadAgente = 7;
 
-    // Tiempo maximo por decision (ms). 0 = sin limite de tiempo.
-    private const int TiempoMaximoDecisionMs = 500;
-
     // Agente que juega con amarillas (MAX=amarilla, MIN=roja).
     private static readonly Minimax AgenteAmarillo = new Minimax(
         Tablero.Amarilla,
         Tablero.Roja,
-        ProfundidadAgente,
-        TiempoMaximoDecisionMs);
+        ProfundidadAgente);
 
     // Agente que juega con rojas (MAX=roja, MIN=amarilla).
     private static readonly Minimax AgenteRojo = new Minimax(
         Tablero.Roja,
         Tablero.Amarilla,
-        ProfundidadAgente,
-        TiempoMaximoDecisionMs);
+        ProfundidadAgente);
 
     public static void Main()
     {
