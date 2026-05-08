@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("p3ABIA")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0ccfcc79d5d3b0fa7f2f7ed27ab6c4378a70943f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b166d35ad1ae4e4af3b436e1d7a0201803f23b46")]
 [assembly: System.Reflection.AssemblyProductAttribute("p3ABIA")]
 [assembly: System.Reflection.AssemblyTitleAttribute("p3ABIA")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
