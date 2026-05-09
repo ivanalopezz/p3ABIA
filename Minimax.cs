@@ -93,8 +93,9 @@ public sealed class Minimax
         int alfa = int.MinValue;
         int beta = int.MaxValue;
 
-        // accionElegida inicial.
-        int accionElegida = acciones[0];
+        // Acciones empatadas con el mejor resultado encontrado.
+        var mejoresAcciones = new List<int>();
+        bool hayMejorResultado = false;
         ResultadoBusqueda mejorResultado = ResultadoBusqueda.PeorParaMax();
 
         // Para cada accion en ACCIONES(estado):
@@ -106,10 +107,16 @@ public sealed class Minimax
             ResultadoBusqueda resultadoAccion = SumarUnNivel(
                 ValorMin(estadoResultado, _profundidadMaxima - 1, alfa, beta));
 
-            if (EsMejorParaMax(resultadoAccion, mejorResultado))
+            if (!hayMejorResultado || EsMejorParaMax(resultadoAccion, mejorResultado))
             {
                 mejorResultado = resultadoAccion;
-                accionElegida = accion;
+                mejoresAcciones.Clear();
+                mejoresAcciones.Add(accion);
+                hayMejorResultado = true;
+            }
+            else if (SonResultadosEquivalentes(resultadoAccion, mejorResultado))
+            {
+                mejoresAcciones.Add(accion);
             }
 
             // MAX mejora su cota inferior.
@@ -119,7 +126,7 @@ public sealed class Minimax
             }
         }
 
-        return accionElegida;
+        return mejoresAcciones[Random.Shared.Next(mejoresAcciones.Count)];
     }
 
     // PSEUDOCODIGO: VALOR-MAX(estado, alfa, beta)
@@ -297,6 +304,13 @@ public sealed class Minimax
         }
 
         return false;
+    }
+
+    private static bool SonResultadosEquivalentes(ResultadoBusqueda primero, ResultadoBusqueda segundo)
+    {
+        return primero.Valor == segundo.Valor &&
+            primero.DistanciaVictoriaMax == segundo.DistanciaVictoriaMax &&
+            primero.DistanciaDerrotaMax == segundo.DistanciaDerrotaMax;
     }
 
     private static bool EsMejorParaMin(ResultadoBusqueda candidato, ResultadoBusqueda actual)
