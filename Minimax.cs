@@ -100,7 +100,8 @@ public sealed class Minimax
 
         // Para cada accion en ACCIONES(estado):
         //   v2 = VALOR-MIN(RESULTADO(estado, accion), alfa, beta)
-        //   si v2 mejora a v: v = v2; accionElegida = accion
+        //   si v2 mejora a v: se reinicia la lista de mejores acciones
+        //   si v2 empata exactamente: se guarda como alternativa equivalente
         foreach (int accion in acciones)
         {
             Tablero estadoResultado = Resultado(estadoActual, accion, _fichaMax);
@@ -151,7 +152,7 @@ public sealed class Minimax
         // Para cada accion:
         //   v = max(v, VALOR-MIN(RESULTADO(...), alfa, beta))
         //   alfa = max(alfa, v)
-        //   si alfa >= beta => podar
+        //   si alfa > beta => podar
         foreach (int accion in acciones)
         {
             Tablero estadoResultado = Resultado(estado, accion, _fichaMax);
@@ -201,7 +202,7 @@ public sealed class Minimax
         // Para cada accion:
         //   v = min(v, VALOR-MAX(RESULTADO(...), alfa, beta))
         //   beta = min(beta, v)
-        //   si alfa >= beta => podar
+        //   si alfa > beta => podar
         foreach (int accion in acciones)
         {
             Tablero estadoResultado = Resultado(estado, accion, _fichaMin);

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3ABIA\\p3ABIA.csproj": {}
+    "C:\\UNI\\2NDO\\Q2\\ABIA\\p3ABIA\\p3ABIA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3ABIA\\p3ABIA.csproj": {
+    "C:\\UNI\\2NDO\\Q2\\ABIA\\p3ABIA\\p3ABIA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3ABIA\\p3ABIA.csproj",
+        "projectUniqueName": "C:\\UNI\\2NDO\\Q2\\ABIA\\p3ABIA\\p3ABIA.csproj",
         "projectName": "p3ABIA",
-        "projectPath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3ABIA\\p3ABIA.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\OneDrive\\Escritorio\\2carrera\\segundoCuatri\\ABIA\\p3ABIA\\obj\\",
+        "projectPath": "C:\\UNI\\2NDO\\Q2\\ABIA\\p3ABIA\\p3ABIA.csproj",
+        "packagesPath": "C:\\Users\\marti\\.nuget\\packages\\",
+        "outputPath": "C:\\UNI\\2NDO\\Q2\\ABIA\\p3ABIA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\marti\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"

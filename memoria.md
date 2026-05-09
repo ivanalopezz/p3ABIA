@@ -273,7 +273,8 @@ Funcion raiz que devuelve la accion (columna) que maximiza el valor minimax:
 3. Inicializa:
    - alfa = int.MinValue (mejor valor garantizado para MAX).
    - beta = int.MaxValue (mejor valor garantizado para MIN).
-   - accionElegida = primera accion (por defecto).
+   - mejoresAcciones = lista vacia de acciones empatadas con el mejor resultado.
+   - hayMejorResultado = false.
    - mejorResultado = PeorParaMax() (peor resultado posible).
 
 4. Para cada accion legal:
@@ -282,10 +283,16 @@ Funcion raiz que devuelve la accion (columna) que maximiza el valor minimax:
    - Suma un nivel a las distancias con SumarUnNivel().
    - Si el resultado es mejor para MAX (segun EsMejorParaMax):
      - Actualiza mejorResultado.
-     - Actualiza accionElegida.
+     - Limpia la lista mejoresAcciones.
+     - Anade la accion actual como unica mejor accion provisional.
+     - Marca hayMejorResultado = true.
+   - Si el resultado empata exactamente con mejorResultado (segun SonResultadosEquivalentes):
+     - Anade la accion actual a mejoresAcciones.
    - Actualiza alfa si mejorResultado.Valor > alfa.
 
-5. Retorna la accionElegida (columna optima).
+5. Retorna una accion aleatoria de mejoresAcciones.
+
+Este ultimo paso evita que, ante varias acciones completamente equivalentes, el agente elija siempre la primera columna del orden de exploracion. La aleatoriedad solo se aplica cuando las acciones empatan en valor minimax, distancia a victoria de MAX y distancia a derrota de MAX; por tanto, no empeora la calidad de la decision.
 
 #### 4.3.6 ValorMax(estado, profundidadRestante, alfa, beta) - Pseudocodigo: VALOR-MAX
 
@@ -308,7 +315,7 @@ Calcula el valor del nodo MAX recursivamente:
    - Si es mejor para MAX:
      - Actualiza mejorResultado.
    - Actualiza alfa = max(alfa, mejorResultado.Valor).
-   - Si alfa >= beta:
+   - Si alfa > beta:
      - PODA (break).
 
 6. Retorna mejorResultado.
@@ -334,12 +341,12 @@ Calcula el valor del nodo MIN recursivamente (simetrico a ValorMax):
    - Si es mejor para MIN:
      - Actualiza mejorResultado.
    - Actualiza beta = min(beta, mejorResultado.Valor).
-   - Si alfa >= beta:
+   - Si alfa > beta:
      - PODA (break).
 
 6. Retorna mejorResultado.
 
-La poda alfa-beta optimiza la busqueda sin alterar el resultado final, reduciendo significativamente nodos expandidos.
+La poda alfa-beta optimiza la busqueda sin alterar el resultado final, reduciendo significativamente nodos expandidos. La implementacion usa corte estricto (alfa > beta) para no descartar empates que podrian aportar un mejor criterio secundario de desempate.
 
 #### 4.3.8 Resultado(estado, accion, fichaTurno) - Pseudocodigo: RESULTADO
 
@@ -357,7 +364,6 @@ Devuelve true si:
 
 - El estado del juego es terminal (algun ganador o tablero lleno).
 - Se alcanza profundidadRestante == 0 (corte por limite de profundidad).
-- Se agota el tiempo (si hubiera limite temporal implementado).
 
 Combina corte estructural (fin real del juego) con corte por profundidad.
 
@@ -379,6 +385,8 @@ Evalua un nodo hoja en la busqueda:
   1. Mejor valor Minimax.
   2. Si valores son iguales, prefiere victoria mas proxima.
   3. Si valores son iguales, prefiere derrota mas lejana.
+
+- **SonResultadosEquivalentes(primero, segundo)**: Devuelve true si dos resultados tienen el mismo valor minimax, la misma distancia a victoria de MAX y la misma distancia a derrota de MAX. DecisionMinimax lo usa para agrupar acciones indistinguibles desde el punto de vista de la busqueda y elegir una de ellas aleatoriamente en la raiz mediante Random.Shared.
 
 - **EsMejorParaMin(nuevo, actual)**: Compara dos resultados de forma simetrica:
   1. Mejor valor Minimax (minimizando).
@@ -407,7 +415,8 @@ La implementacion respeta los bloques teoricos principales:
 | TERMINAL-TEST(estado) | EsTerminal() y PruebaTerminal() |
 | UTILIDAD(estado) | Utilidad() |
 | Alternancia MAX/MIN | ValorMax() y ValorMin() recursivos |
-| Poda alfa-beta | Condicion alfa >= beta en ambas funciones |
+| Poda alfa-beta | Condicion alfa > beta en ambas funciones |
+| Desempate final | SonResultadosEquivalentes() + seleccion aleatoria con Random.Shared |
 
 Tambien incorpora aspectos practicos indispensables:
 
@@ -426,7 +435,7 @@ Con poda alfa-beta:
 
 - En el mejor caso, reduce significativamente el numero de nodos expandidos a O(b^(d/2)).
 - En el peor caso, mantiene orden exponencial O(b^d).
-- En la practica, con heuristica de ordenacion de movimientos, la mejora es considerable.
+- En la practica, la mejora depende del orden de exploracion y de cuantos cortes alfa-beta se produzcan.
 
 Con tablero 4x5 y profundidad 7:
 
@@ -443,6 +452,7 @@ Aspectos positivos:
 - **Separacion de responsabilidades**: Program, Tablero y Minimax con interfaces claros.
 - **Clonado de estados**: Evita efectos laterales durante busqueda.
 - **Compatibilidad**: Una sola clase Minimax sirve ambos colores segun parametros.
+- **Desempate no sesgado**: Si varias acciones son exactamente equivalentes para Minimax en la decision raiz, se elige una aleatoriamente en lugar de favorecer siempre la primera columna disponible.
 - **Comentarios**: Abundantes y alineados con pseudocodigo teorico.
 - **Manejo de casos limite**: Profundidad minima, fichas distintas, columnas llenas, etc.
 
